@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http.Features
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -8,7 +9,7 @@
 <html lang="ja">
     <head>
         <title>買い物メモアプリ</title>
-        <link rel="stylesheet" href="style.css">
+        
     </head>
     <body>
         <h1>買い物リスト</h1>
@@ -20,24 +21,21 @@
         <h2>薬局(日用品)</h2>
 
         <ul>
-            <li>
-                <label><input type="checkbox">にんじん</label>
-            </li>
-            <li>
-                <label><input type="checkbox">ジャガイモ</label>
-            </li>
-            <li>
-                <label><input type="checkbox">カレールー</label>
-            </li>
-        </ul>
-        <ul>
-            <!-- 複数の項目に同じクラスを付ける -->
-            <li class="urgent">にんじん（特売！）</li>
-            <li>じゃがいも</li>
-            <li class="urgent">カレールー（絶対必要！）</li>
-            
-            <!-- ページ内で1つだけの特別な項目にIDを付ける -->
-            <li id="special-item">ご褒美のケーキ</li>
+            <!-- C#のforeach文をHTMLの中に直接書いて、データを自動的に差し込みます -->
+            @foreach (var item in IndexModel.ShoppingList)
+            {
+                <li>
+                    <form method="post" style="margin: 0;">
+                        <label>
+                            <!-- C#の OnPost に「どの品名か(itemName)」を伝えるための必須データ -->
+                            <input type="hidden" name="itemName" value="@item.Name" />
+                            
+                            <!-- チェックボックスと、C#から受け取った品名（@item.Name）を表示 -->
+                            <input type="checkbox" checked="@item.IsCompleted" onchange="this.form.submit()" /> @item.Name
+                        </label>
+                    </form>
+                </li>
+            }
         </ul>
     </body>
 </html>

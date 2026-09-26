@@ -14,15 +14,35 @@ namespace ShoppingMemoWeb.Pages
         }
 
         // 2. HTML（表側）に渡すためのリストを準備
-        public List<ShoppingItem> ShoppingList { get; set; } = new List<ShoppingItem>();
+        public static List<ShoppingItem> ShoppingList { get; set; } = new List<ShoppingItem>()
+        {
+            new ShoppingItem { Name = "にんじん", IsCompleted = false },
+            new ShoppingItem { Name = "じゃがいも", IsCompleted = false },
+            new ShoppingItem { Name = "カレールー", IsCompleted = false }
+        };
 
         // 3. ページが開かれたときに実行される処理
         public void OnGet()
         {
-            // リストにデータを追加します（じゃがいもだけチェック済みにしてみます）
-            ShoppingList.Add(new ShoppingItem { Name = "にんじん", IsCompleted = false });
-            ShoppingList.Add(new ShoppingItem { Name = "じゃがいも", IsCompleted = true });
-            ShoppingList.Add(new ShoppingItem { Name = "カレールー", IsCompleted = false });
+          
+        }
+        // ▼ここから新規追加：画面からデータが送信（POST）された時の処理▼
+        public void OnPost(string itemName)
+        {
+            Console.WriteLine($"【テスト】通信が来ました！ 送られてきた品名: {itemName}");
+            // 送られてきた品名と同じアイテムをリストの中から探します
+            var item = ShoppingList.Find(itemlist => itemlist.Name == itemName);
+            
+            // もし見つかったら、チェック状態を反転（true⇔false）させます
+            if (item != null)
+            {
+                item.IsCompleted = !item.IsCompleted;
+                Console.WriteLine($"【通信成功】{item.Name} のチェック状態が {item.IsCompleted} に更新されました！");
+            }
+            else
+            {
+                Console.WriteLine($"【エラー】リストの中に {itemName} が見つかりませんでした。");
+            }
         }
     }
 }
