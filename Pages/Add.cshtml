@@ -1,0 +1,18 @@
+@page
+@model AddModel
+@{
+    ViewData["Title"] = "アイテムの追加";
+}
+
+<h1>新しい買うものを登録</h1>
+
+<!-- アイテムを追加するためのフォーム -->
+<form method="post">
+    <!-- C#の OnPost の引数（newItemName）と name 属性を合わせます[cite: 8] -->
+    <input type="text" name="newItemName" placeholder="にんじん、など..." required />
+    <button type="submit">登録して一覧に戻る</button>
+</form>
+
+<br>
+<!-- リスト画面に戻るためのリンク -->
+<a href="/Index">リスト画面に戻る</a>

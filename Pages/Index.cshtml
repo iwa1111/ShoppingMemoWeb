@@ -18,6 +18,12 @@
         <h2>スーパー(夕食の材料)</h2>
         <p>カレーの材料を忘れずに安く買うこと。</p>
 
+        <!-- アイテムを追加するためのフォーム  -->
+        <!-- ▼ 古いフォームを消して、新しいページへのリンクを置く ▼ -->
+        <a href="/Add" style="display: inline-block; margin-bottom: 20px;">
+            ＋ 新しいアイテムを追加する
+        </a>
+
         <h2>薬局(日用品)</h2>
 
         <ul>
@@ -25,9 +31,10 @@
             @foreach (var item in IndexModel.ShoppingList)
             {
                 <li>
-                    <form method="post" style="margin: 0;">
+                    <form method="post" asp-page-handler="Update" style="margin: 0;">
                         <label>
                             <!-- C#の OnPost に「どの品名か(itemName)」を伝えるための必須データ -->
+                            <input type="hidden" name="handler" value="Update" />
                             <input type="hidden" name="itemName" value="@item.Name" />
                             
                             <!-- チェックボックスと、C#から受け取った品名（@item.Name）を表示 -->

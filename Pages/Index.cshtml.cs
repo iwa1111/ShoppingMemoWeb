@@ -27,7 +27,7 @@ namespace ShoppingMemoWeb.Pages
           
         }
         // ▼ここから新規追加：画面からデータが送信（POST）された時の処理▼
-        public void OnPost(string itemName)
+        public void OnPostUpdate(string itemName)
         {
             Console.WriteLine($"【テスト】通信が来ました！ 送られてきた品名: {itemName}");
             // 送られてきた品名と同じアイテムをリストの中から探します
@@ -44,5 +44,7 @@ namespace ShoppingMemoWeb.Pages
                 Console.WriteLine($"【エラー】リストの中に {itemName} が見つかりませんでした。");
             }
         }
+
+       
     }
 }
