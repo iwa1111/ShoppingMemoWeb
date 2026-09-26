@@ -1,0 +1,37 @@
+body{
+    margin: 20px;
+}
+
+h2{
+    color:blue;
+}
+ul {
+    list-style-type:none;
+    padding: 0;
+}
+li{
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+input[tyoe="checkbox"]{
+    margin-right: 15px;
+    transform: scale(1.5);
+}
+
+/* クラスセレクタ：先頭にドット（.） */
+.urgent {
+  color: red;        /* 文字を赤くして目立たせる */
+  font-weight: bold; /* 文字を太くする */
+}
+
+/* IDセレクタ：先頭にハッシュ（#） */
+#special-item {
+  background-color: #ffd700; /* 背景を金色にする */
+  padding: 10px;             /* 内側の余白をつけて箱を少し大きくする */
+}
