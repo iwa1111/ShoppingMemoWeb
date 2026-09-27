@@ -13,24 +13,11 @@
     </head>
     <body>
         <h1>買い物リスト</h1>
-        <p>スーパーと薬局で買うもののメモです。</p>
-
-        <h2>スーパー(夕食の材料)</h2>
-        <p>カレーの材料を忘れずに安く買うこと。</p>
-
-        <!-- アイテムを追加するためのフォーム  -->
-        <!-- ▼ 古いフォームを消して、新しいページへのリンクを置く ▼ -->
-        <a href="/Add" style="display: inline-block; margin-bottom: 20px;">
-            ＋ 新しいアイテムを追加する
-        </a>
-
-        <h2>薬局(日用品)</h2>
-
         <ul>
             <!-- C#のforeach文をHTMLの中に直接書いて、データを自動的に差し込みます -->
             @foreach (var item in IndexModel.ShoppingList)
             {
-                <li>
+                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <form method="post" asp-page-handler="Update" style="margin: 0;">
                         <label>
                             <!-- C#の OnPost に「どの品名か(itemName)」を伝えるための必須データ -->
@@ -40,6 +27,14 @@
                             <!-- チェックボックスと、C#から受け取った品名（@item.Name）を表示 -->
                             <input type="checkbox" checked="@item.IsCompleted" onchange="this.form.submit()" /> @item.Name
                         </label>
+                    </form>
+
+                    <!-- 削除機能 -->
+                    <form method="post" asp-page-handler="Delete" style="margin: 0;">
+                        <input type="hidden" name="itemName" value="@item.Name" />
+                        <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                            削除
+                        </button>
                     </form>
                 </li>
             }
