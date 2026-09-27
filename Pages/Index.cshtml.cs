@@ -45,6 +45,16 @@ namespace ShoppingMemoWeb.Pages
             }
         }
 
+        public void OnPostDelete(string itemName)
+        {
+            var item = ShoppingList.Find(x => x.Name == itemName);
+
+            if(item != null)
+            {
+                ShoppingList.Remove(item);
+                Console.WriteLine($"[削除成功] {item.Name} をリストから削除しました！");
+            }
+        }
        
     }
 }
