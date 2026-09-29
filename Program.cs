@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using ShoppingMemoWeb;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// appsettings.jsonに書いた物を読み込み、PostgresSQLを使うように設定
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ShoppingDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
