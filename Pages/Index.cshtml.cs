@@ -40,11 +40,21 @@ namespace ShoppingMemoWeb.Pages
         //削除処理
         public IActionResult OnPostDelete(int id)
         {
+            //通信が届いたかログを出力
+            Console.WriteLine($"【テスト】削除の通信を確認。送られてきたID:{id}");
+
             var item = _context.ShoppingItems.Find(id);
             if (item != null)
             {
                 _context.ShoppingItems.Remove(item);
                 _context.SaveChanges(); 
+
+                Console.WriteLine($"【削除成功】 ID: {id}のアイテムを削除しました");
+            }
+            else
+            {
+                //データが見つからなかった
+                Console.WriteLine($"【エラー】 ID:{id}のアイテムが見つかりませんでした");
             }
             return RedirectToPage();
         }
