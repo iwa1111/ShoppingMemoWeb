@@ -19,13 +19,19 @@ namespace ShoppingMemoWeb.Pages
 
         public IActionResult OnPost(String newItemName)
         {
+            Console.WriteLine($"[登録要求]品名{newItemName}の登録要求が来た");
             if(!string.IsNullOrWhiteSpace(newItemName))
             {
                 //データベースに新しいアイテムを追加
                 _context.ShoppingItems.Add(new ShoppingItem {Name = newItemName, IsCompleted = false});
                 _context.SaveChanges(); //変更を確定
+                Console.WriteLine($"[登録完了]品名{newItemName}の登録完了");
 
                 return RedirectToPage("/Index");
+            }
+            else
+            {
+                Console.WriteLine($"[エラー]品名{newItemName}の失敗");
             }
             return Page();
         }
