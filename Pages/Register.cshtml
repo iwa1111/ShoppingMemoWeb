@@ -1,0 +1,27 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "新規ユーザー登録";
+}
+
+<h1>新規ユーザー登録</h1>
+<p>アカウントを作成してください。</p>
+
+<form method="post" style="max=width: 400px; display: flex; flex-direction: column; gap:15px;">
+    <div>
+        <label>アカウント名</label><br/>
+        <input type="text" name="userName" required style="width: 100%; padding: 8px"/>
+    </div>
+    <div>
+        <label>Eメール</label><br />
+        <input type="email" name="email" required style="width: 100%; padding: 8px;"/>
+    </div>
+    <div>
+        <label>パスワード</label><br />
+        <input type="password" name="password" required style="width: 100%; padding: 8px;"/>
+    </div>
+    <button type="submit" style="padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        登録する
+    </button>
+
+</form>

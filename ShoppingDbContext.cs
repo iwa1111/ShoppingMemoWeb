@@ -11,5 +11,8 @@ namespace ShoppingMemoWeb
         }
         // データベースの中に「ShoppingItems」という名前のテーブルを作る宣言
         public DbSet<ShoppingItem> ShoppingItems {get; set;}
+        
+        // ユーザー情報を保存するテーブル
+        public DbSet<User> Users {get;set;}
     }
 }
