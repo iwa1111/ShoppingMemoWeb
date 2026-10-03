@@ -1,7 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ShoppingMemoWeb;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ログイン機能設定
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+       options.LoginPath = "/Login";// 
+    });
 
 // appsettings.jsonに書いた物を読み込み、PostgresSQLを使うように設定
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -25,6 +33,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
